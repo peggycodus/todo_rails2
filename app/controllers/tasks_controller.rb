@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.all.not_done
     render('tasks/index.html.erb')
   end
 
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update(:name => params[:name])
+    if @task.update(:name => params[:name], :done => params[:done])
       render('tasks/success.html.erb')
     else
       render('tasks/edit.html.erb')
@@ -42,6 +42,16 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.destroy
     render('tasks/destroy.html.erb')
+  end
+
+  def not_done
+    Task.where(:done => false)
+  end
+
+  def done
+    @task = Task.find(params[:id])
+    @task.done = true
+    render('tasks/index.html.erb')
   end
 
 

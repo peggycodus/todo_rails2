@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   match('tasks/:id/edit', {:via => :get, :to => 'tasks#edit'})
   match('tasks/:id', {:via => [:patch, :put], :to => 'tasks#update'})
   match('tasks/:id', {:via => :delete, :to => 'tasks#destroy'})
+  match('tasks/:id/done', {:via => [:patch, :put], :to => 'tasks#update'})
 
   resources :tasks do
     get 'toggle_done', :on => :member

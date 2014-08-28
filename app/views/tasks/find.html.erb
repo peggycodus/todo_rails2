@@ -1,6 +1,10 @@
 <h4><%= @task.name %></h4>
 
-
+<form action="/tasks/<%= @task.done %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input name="task[done]" type="hidden" value="true">
+  <button class="btn-small" style="background-color:green;color:white;">Mark done</button>
+</form>
 
 <p><a href="/tasks">Return to task listing</a></p>
 
